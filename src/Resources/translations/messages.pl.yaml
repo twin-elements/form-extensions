@@ -1,0 +1,7 @@
+admin_type:
+  save: Zapisz
+  title: Tytuł
+  image_album:
+    choose_image: Wybierz zdjęcie
+    image_album: Galeria zdjęć
+  image: Obrazek

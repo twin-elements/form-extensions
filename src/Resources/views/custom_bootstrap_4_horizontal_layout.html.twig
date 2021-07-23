@@ -1,0 +1,294 @@
+{% use 'bootstrap_4_horizontal_layout.html.twig' %}
+{% use '@TwinElementsAdmin/block/blocks.html.twig' %}
+
+{% block tinymce_type_row %}
+    <div class="row form-group tinymce-widget">
+        <div class="col-md-12">
+            <label>{{ label | default('Treść') }}</label>
+            {% if help %}
+                <div class="mt-n1 mb-3">
+                    {{ form_help(form) }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-12">
+            {{ form_widget(form) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block save_button_row %}
+    <div class="mt-5">
+        <button type="submit" class="btn btn-primary">{{ "admin_type.save"|translate_admin }}</button>
+    </div>
+{% endblock %}
+
+{% block save_buttons_row %}
+    <div id="save_buttons">
+        {% for button in form %}
+            {{ form_widget(button) }}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block toggle_choice_widget %}
+    {% spaceless %}
+        <div {{ block('widget_container_attributes') }} class="toggle_widget">
+            <div class="toggle_widget_container d-inline-flex">
+                {% for child in form %}
+                    <div class="toggle_color_{{ child.vars.value }}">
+                        <input type="radio" id="{{ child.vars.id }}" name="{{ child.vars.full_name }}"
+                               class="cms-checkbox" value="{{ child.vars.value }}"
+                               {% if child.vars.checked %}checked="checked"{% endif %}>
+                        <label for="{{ child.vars.id }}"
+                               class="choice_label toggle_color_{{ child.vars.value }}">{{ child.vars.label }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block choice_widget_expanded %}
+    <div {{ block('widget_container_attributes') }} class="clearfix choice_widget_expanded">
+        {% for child in form %}
+            <div class="cms-checkbox-content">
+                {{ form_widget(child, {'attr': {'class':'cms-checkbox'}, label_attr: {class: 'btn btn-outline-primary'}}) }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock choice_widget_expanded %}
+
+{% block seo_type_row %}
+    <div id="seo-type-widget">
+        <label>SEO</label>
+        <div>
+            {% for child in form.children %}
+                {{ form_row(child) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block images_type_widget %}
+    {% for choice in choices %}
+        <div class="col-md-3 ">
+            <div class="images_widget_image_container">
+                <input id="{{ id }}_{{ choice.value }}"
+                       type="{% if multiple %}checkbox{% else %}radio{% endif %}"
+                       name="{{ full_name }}{% if multiple %}[]{% endif %}"
+                       value="{{ choice.value }}"
+                       {% if choice.value in value %}checked="checked"{% endif %}>
+                <div data-id="{{ id }}_{{ choice.value }}" class="images_widget_image"
+                     style="background-image:url('{{ asset(choice.data.path) }}');" title="{{ choice.label }}">
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block text_in_collection_type_row %}
+    {{ form_widget(form, {'attr': {'placeholder': form.vars.label}}) }}
+{% endblock %}
+
+{% block date_time_picker_row %}
+    <div class="form-group row align-items-center">
+        {{ form_label(form) }}
+        <div class="input-group date col-sm-10 align-items-center justify-content-center" data-toggle="datetimepicker">
+            {{ block('datetime_widget') }}
+            <span class="input-group-addon ">
+            <span class="jcon jcon-clock" aria-hidden="true"></span>
+        </span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block date_picker_widget %}
+    <div class="form-group row align-items-center">
+        {#        {{ form_label(form) }}#}
+        <div class="input-group date col-sm-5 align-items-center justify-content-center" data-toggle="datetimepicker">
+            {{ block('datetime_widget') }}
+            <span class="input-group-addon ">
+            <span class="jcon jcon-clock" aria-hidden="true"></span>
+        </span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block te_collection_widget %}
+    <div {{ block('widget_container_attributes') }}>
+        {% for child in form %}
+            {% set collection_children = child %}
+            {% if vertical %}
+                {% set index = loop.index %}
+                {% set accordion_card_title = attribute(child.vars.data, card_label_field) %}
+                {% set accordion_card_active = false %}
+                {{ block('te_collection_prototype_vertical') }}
+            {% else %}
+                {{ block('te_collection_prototype_horizontal') }}
+            {% endif %}
+
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block te_collection_prototype_horizontal %}
+    <div class="form-row collection-child-actions-container">
+        {% set row_active = collection_children.active is defined ? collection_children.active : false %}
+        {% set row_state = row_active ? (row_active.vars.value ? '' : ' disabled') : '' %}
+        {% if collection_children | length %}
+            <div class="col d-flex flex-column{{ row_state }}">
+                {% for child in collection_children %}
+                    <div class="col px-0{% if not loop.last %} mb-2{% endif %}">
+                        <label>{{ child.vars.label }}</label>
+                        {% if child.vars.help %}
+                            <small class="form-text text-muted">{{ child.vars.help }}</small>
+                        {% endif %}
+                        <div>
+                            {% set attrs = child.vars.attr | merge({'placeholder': child.vars.label}) %}
+                            {{ form_widget(child, {'attr': attrs, required: (row_active and row_active.vars.value is not empty)}) }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="col">
+                {% set attrs = collection_children.vars.attr | merge({'placeholder': collection_children.vars.label}) %}
+                {{ form_widget(collection_children, {'attr': attrs}) }}
+            </div>
+        {% endif %}
+        {% if row_active is defined and row_active %}
+            <button type="button"
+                    class="btn btn-link disable-collection-element text-decoration-none text-{{ row_active and row_active.vars.value ? 'success' : 'danger' }}"
+                    data-input-id="{{ row_active.vars.id }}">
+                <i class="display-4 jcon jcon-switch-{{ row_active and row_active.vars.value ? 'on' : 'off' }}"></i>
+            </button>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block te_collection_prototype_vertical %}
+
+    {% set accordion_header_attr = {'class': 'card-header collection-child-actio11ns-container d-flex justify-content-between', 'id': collection_children.vars.id ~ '_heading_' ~ index} %}
+    {% set accordion_content_id = collection_children.vars.id ~ '_content_' ~ index %}
+    {% set accordion_content_body = form_widget(collection_children) %}
+    {{ block('accordion_card') }}
+{% endblock %}
+
+{% block core_admin_bundle_tecollection_type_widget %}
+    <div class="te-collection-type-container row">
+        <div class="col-12">
+            {% spaceless %}
+                {% set accordion_id = id %}
+                {% set accordion_card_active = false %}
+                {% set attr = attr|merge({'data-children-count': (form | length) + 1}) %}
+                {% if prototype is defined %}
+                    {% set collection_children = prototype %}
+                    {% set index = attr['data-children-count'] %}
+                    {% set accordion_card_title = new_card_label %}
+                    {% set attr = attr|merge({'data-prototype': vertical ? block('te_collection_prototype_vertical') : block('te_collection_prototype_horizontal')}) %}
+                    {% set attr = attr|merge({'data-prototype-name': prototype.vars.name}) %}
+                {% endif %}
+                {% if vertical %}
+                    {% set attr = attr | merge({'class': attr.class ~ ' accordion'}) %}
+                {% endif %}
+                {% set attr = attr|merge({'data-allow-add': allow_add ? 1 : 0}) %}
+                {% set attr = attr|merge({'data-allow-remove': allow_delete ? 1 : 0 }) %}
+                {% set attr = attr|merge({'data-allow-change-position': allow_change_position ? 1 : 0 }) %}
+                {% set attr = attr|merge({'data-name-prefix': full_name}) %}
+                {% set attr = attr|merge({'data-min-count': min}) %}
+                {% set attr = attr|merge({'data-max-count': max}) %}
+                {{ block('te_collection_widget') }}
+            {% endspaceless %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block core_admin_bundle_teupload_type_widget %}
+    <div class="input-group">
+        {% if file_type == 'image' and data is not null %}
+            <div class="input-group-prepend">
+                <a id="{{ id }}-thumbnail" href="{{ asset(data) }}" data-lightbox="{{ id }}"
+                   class="teuploadtype-thumbnail" style="background-image: url('{{ asset(data) }}');"></a>
+            </div>
+        {% elseif allow_copy %}
+            <div class="input-group-prepend">
+                <button type="button" id="{{ id }}-copy-button" data-clipboard-target="#{{ id }}"
+                        class="btn btn-outline-secondary filemanager-input-copy" {% if not data %}disabled{% endif %}>
+                    <i class="jcon jcon-sheet"></i>
+                </button>
+            </div>
+        {% endif %}
+        {% set attr = attr | merge({'data-file-type': file_type}) %}
+        {{ form_widget(form, {attr: attr}) }}
+        <div class="input-group-append col-sm-3 col-xl-5 p-0">
+            <div class="btn-group row mx-0 w-100" role="group" id="{{ id }}-btn-group">
+                <button class="btn btn-secondary col-6 open-file-manager-btn"
+                        data-iframe-src="{{ path('file_manager', {'module': 1, 'conf': conf}) }}"
+                        data-modal-title="{{ placeholder }}" data-input-id="{{ id }}" type="button"
+                        id="{{ id }}-add-button"><span class="d-none d-xl-inline">{{ add_button_text }}</span> <i
+                            class="jcon jcon-add"></i></button>
+                <button class="btn btn-danger col-6 file-manager-delete-button" type="button"
+                        id="{{ id }}-delete-button" {% if not data %}disabled{% endif %}><span
+                            class="d-none d-xl-inline">{{ delete_button_text }}</span> <i
+                            class="jcon jcon-trash"></i></button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block core_admin_bundle_techoose_link_type_widget %}
+    <div class="row">
+        <div class="col-12 d-flex align-items-center">
+            <div class="link-placeholder">
+                {% if value %}
+                    <div class="pr-4">
+                        {{ value | generateModuleUrl(app.request.locale) }}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="button" class="choose-link-btn btn btn-primary" data-toggle="modal"
+                    data-target="#{{ id }}-modal">{% if value %}{{ "choose_link_widget.change_link"|trans({},null,admin_locale) }}{% else %}{{ "choose_link_widget.choose_link"|trans({},null,admin_locale) }}{% endif %}</button>
+            <button type="button"
+                    class="btn btn-link reset-module-link{% if not value %} d-none{% endif %}">{{ "choose_link_widget.clear"|trans({},null,admin_locale) }}</button>
+        </div>
+    </div>
+    {% set type = 'hidden' %}
+    {{ block('form_widget_simple') }}
+    <div class="modal fade choose-link-modal" tabindex="-1" data-input-value="{{ value }}" id="{{ id }}-modal"
+         role="dialog" aria-hidden="true" aria-labelledby="choose-link-modal-label">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mb-0"
+                        id="choose-link-modal-label">{{ "choose_link_widget.choose_link"|trans({},null,admin_locale) }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{ render(controller('TwinElementsFormExtensionsBundle:ChooseLink:generateListOfLinks')) }}
+                </div>
+                <div class="modal-footer d-block">
+                    <h5 class="modal-title mb-2">{{ "choose_link_widget.or_write_own_url"|trans({},null,admin_locale) }}</h5>
+                    <div class="form-group m-0 position-relative">
+                        <input type="url" id="{{ id }}-custom-href" name="{{ id }}-custom-href"
+                               class="form-control custom-href-input">
+                        <button class="btn btn-outline-secondary open-file-manager-btn"
+                                data-iframe-src="{{ path('file_manager', {'module': 1, 'conf': 'button'}) }}"
+                                data-modal-title="{{ "choose_link_widget.choose_file"|trans({},null,admin_locale) }}"
+                                data-input-id="{{ id }}-custom-href" id="{{ id }}-custom-href-add-button" type="button"
+                                title="{{ "choose_link_widget.choose_file"|trans({},null,admin_locale) }}"><i
+                                    class="jcon jcon-folder-add"></i></button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary cancel-btn"
+                            data-dismiss="modal">{{ "choose_link_widget.cancel"|trans({},null,admin_locale) }}</button>
+                    <button type="button"
+                            class="btn btn-primary accept-link-btn">{{ "choose_link_widget.choose"|trans({},null,admin_locale) }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
