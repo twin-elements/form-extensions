@@ -1,0 +1,26 @@
+{
+    "name": "twin-elements/form-extensions",
+    "description": "Forms for CMS",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Władysław Dudko",
+            "email": "wladyslaw@jellinek.pl"
+        }
+    ],
+    "require": {
+        "php": "^7.1.3",
+        "artgris/filemanager-bundle": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "TwinElements\\FormExtensions\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TwinElements\\FormExtensions\\Tests\\": "tests/"
+        }
+    }
+}
