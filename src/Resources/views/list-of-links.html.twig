@@ -1,0 +1,16 @@
+<div id="modules-list-container">
+    {% for moduleName, moduleUrls in modules %}
+        <div class="single-module-container py-3 {% if not loop.last %}border-bottom{% endif %}">
+        <a href="#{{ moduleName }}" class="h5 d-block" data-toggle="collapse" role="button">{{ (moduleName ~ ".module_name")|trans({},'messages',admin_locale) }}</a>
+        <div class="collapse" id="{{ moduleName }}">
+            <div class="card card-body bg-light">
+                {% for moduleUrlItem in moduleUrls %}
+                        <a href="javascript:void(0)" class="d-block py-1 select-link mx-n2 pl-2 pr-5 position-relative" data-link-id="{{ moduleUrlItem.id }}">
+                            {{ moduleUrlItem.title }}
+                        </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

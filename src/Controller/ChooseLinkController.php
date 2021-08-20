@@ -28,7 +28,7 @@ class ChooseLinkController extends AbstractController
             $modules[$urlGeneratorName] = $urlGenerator->getUrlList();
         }
 
-        return $this->render('@CoreAdmin/list-of-links.html.twig', [
+        return $this->render('@TwinElementsFormExtensions/list-of-links.html.twig', [
             'modules' => $modules
         ]);
     }
