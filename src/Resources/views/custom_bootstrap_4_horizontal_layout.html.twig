@@ -1,5 +1,6 @@
 {% use 'bootstrap_4_horizontal_layout.html.twig' %}
 {% use '@TwinElementsAdmin/block/blocks.html.twig' %}
+{% use '@TwinElementsSeo/seo-fields.html.twig' %}
 
 {% block tinymce_type_row %}
     <div class="row form-group tinymce-widget">
@@ -58,17 +59,6 @@
         {% endfor %}
     </div>
 {% endblock choice_widget_expanded %}
-
-{% block seo_type_row %}
-    <div id="seo-type-widget">
-        <label>SEO</label>
-        <div>
-            {% for child in form.children %}
-                {{ form_row(child) }}
-            {% endfor %}
-        </div>
-    </div>
-{% endblock %}
 
 {% block images_type_widget %}
     {% for choice in choices %}

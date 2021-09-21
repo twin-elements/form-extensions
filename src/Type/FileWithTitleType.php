@@ -7,16 +7,16 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SingleAttachmentType extends AbstractType
+class FileWithTitleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Nazwa załącznika',
+                'label' => 'Tytuł pliku'
             ])
             ->add('file', TEUploadType::class, [
-                'label' => 'Załącznik',
+                'label' => 'Plik',
                 'required' => false,
                 'conf' => $options['conf']
             ]);
@@ -24,11 +24,13 @@ class SingleAttachmentType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('conf', null);
+        $resolver
+            ->setDefault('conf', null)
+            ->setDefault('file_type', null);
     }
 
     public function getBlockPrefix()
     {
-        return 'single_attachment_type';
+        return 'file_with_title_type';
     }
 }
