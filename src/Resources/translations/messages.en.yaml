@@ -1,0 +1,79 @@
+admin_type:
+  save: Save
+  title: Title
+  image_album:
+    choose_image: Choose images
+    image_album: Image gallery
+  image: Image
+  yes: Yes
+  no: No
+  active: Active
+
+# file manager
+file:
+  add:
+    success: The file has been successfully loaded
+  renamed:
+    success: The file name has been successfully changed
+    danger: The file already exists or you have no permission to rename it
+    unauthorized: The files already exist or you have no permission to modify this page
+    nochanged: No changes
+  deleted:
+    success: The files have been successfully removed
+    danger: The files already exist or you have no permission to modify this page
+    unauthorized: The files already exist or you have no permission to modify this page
+folder:
+  add:
+    danger: "An error occured during creating the folder: %message%"
+    success: The folder has been successfully created
+  deleted:
+    success: The folder has been successfully deleted
+    unauthorized: The file already exists or you have no permission to modify this page
+button:
+  cancel: CANCEL
+  refresh: Refresh
+  parent: Parent folder
+  save: Save
+  add:
+    files: Add files...
+    folder: New folder...
+  delete:
+    current: Delete current folder
+    selected: Delete selected files
+    action: DELETE
+  rename:
+    action: Rename
+  tree: Directory tree
+title:
+  add:
+    folder: New folder
+  rename:
+    file: Rename
+  delete: Delete
+  download: Download
+input:
+  default: Untitled folder
+table:
+  name: Name
+  date: Date
+  size: Size
+  dimension: Dimensions
+  actions: Actions
+confirm:
+  delete:  Are you sure?
+size:
+  mb: MB
+  kb: kB
+select-all: Select all
+upload:
+  exception_move_uploaded_file: Access denied
+
+#choose_link_widget
+choose_link_widget:
+  choose_link: Choose link
+  change_link: Change link
+  clear: Clear
+  or_write_own_url: Or enter your own link
+  choose_file: Choose file
+  cancel: Cancel
+  choose: Choose

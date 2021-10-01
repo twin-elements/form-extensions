@@ -23,11 +23,11 @@ class ToggleChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => [
-                'Tak' => 1,
-                'Nie' => 0
+                $this->translator->translate('admin_type.yes') => 1,
+                $this->translator->translate('admin_type.no') => 0
             ],
             'expanded' => true,
-            'label' => $this->translator->translate('cms.active')
+            'label' => $this->translator->translate('admin_type.active')
         ]);
     }
 

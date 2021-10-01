@@ -1,13 +1,13 @@
 admin_type:
-  save: Zapisz
-  title: Tytuł
+  save: Записать
+  title: Название
   image_album:
-    choose_image: Wybierz zdjęcie
-    image_album: Galeria zdjęć
-  image: Obrazek
-  yes: Tak
-  no: Nie
-  active: Aktywny
+    choose_image: Выберите изображение
+    image_album: Галлерея
+  image: Изображение
+  yes: Да
+  no: Нет
+  active: Активный
 
 # file manager
 file:
@@ -70,10 +70,10 @@ upload:
 
 #choose_link_widget
 choose_link_widget:
-  choose_link: Wybierz link
-  change_link: Zmień link
-  clear: Wyczyść
-  or_write_own_url: Lub wpisz własny odnośnik
-  choose_file: Wybierz plik
-  cancel: Anuluj
-  choose: Wybierz
+  choose_link: Выбрать ссылку
+  change_link: Изменить ссылку
+  clear: Удалить
+  or_write_own_url: Или впишите собственную ссылку
+  choose_file: Выбери файл
+  cancel: Отменить
+  choose: Выбрать

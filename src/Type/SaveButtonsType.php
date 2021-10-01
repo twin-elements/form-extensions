@@ -26,13 +26,13 @@ class SaveButtonsType extends AbstractType
     {
         $builder
             ->add('save', SubmitType::class, [
-                'label' => $this->translator->translate('cms.save'),
+                'label' => $this->translator->translate('admin.save'),
                 'attr' => [
                     'class' => 'btn btn-primary'
                 ]
             ])
             ->add('save_and_back', SubmitType::class, [
-                'label' => $this->translator->translate('cms.save_and_back'),
+                'label' => $this->translator->translate('admin.save_and_back'),
                 'attr' => [
                     'class' => 'btn btn-primary'
                 ]
