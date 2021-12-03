@@ -10,9 +10,9 @@ use TwinElements\FormExtensions\Type\TEUploadType;
 
 class TEUploadTypeExtension extends AbstractTypeExtension
 {
-    public function getExtendedTypes() :iterable
+    public static function getExtendedTypes() :iterable
     {
-        return array(TEUploadType::class);
+        return [TEUploadType::class];
     }
 
     public function configureOptions(OptionsResolver $resolver)

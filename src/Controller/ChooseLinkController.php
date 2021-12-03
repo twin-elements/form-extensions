@@ -3,6 +3,7 @@
 namespace TwinElements\FormExtensions\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use TwinElements\FormExtensions\Component\UrlBuilder\ModuleUrlGeneratorFactory;
 use TwinElements\FormExtensions\Component\UrlBuilder\ModuleUrlGeneratorInterface;
 
@@ -18,7 +19,7 @@ class ChooseLinkController extends AbstractController
         $this->urlGeneratorFactory = $urlGeneratorFactory;
     }
 
-    public function generateListOfLinksAction()
+    public function generateListOfLinks() : Response
     {
         $modules = [];
         /**

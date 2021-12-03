@@ -33,7 +33,7 @@
 {% endblock %}
 
 {% block toggle_choice_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div {{ block('widget_container_attributes') }} class="toggle_widget">
             <div class="toggle_widget_container d-inline-flex">
                 {% for child in form %}
@@ -47,7 +47,7 @@
                 {% endfor %}
             </div>
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 
 {% block choice_widget_expanded %}
@@ -168,7 +168,7 @@
 {% block core_admin_bundle_tecollection_type_widget %}
     <div class="te-collection-type-container row">
         <div class="col-12">
-            {% spaceless %}
+            {% apply spaceless %}
                 {% set accordion_id = id %}
                 {% set accordion_card_active = false %}
                 {% set attr = attr|merge({'data-children-count': (form | length) + 1}) %}
@@ -189,7 +189,7 @@
                 {% set attr = attr|merge({'data-min-count': min}) %}
                 {% set attr = attr|merge({'data-max-count': max}) %}
                 {{ block('te_collection_widget') }}
-            {% endspaceless %}
+            {% endapply %}
         </div>
     </div>
 {% endblock %}
@@ -257,7 +257,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{ render(controller('TwinElementsFormExtensionsBundle:ChooseLink:generateListOfLinks')) }}
+                    {{ render(controller('TwinElements\\FormExtensions\\Controller\\ChooseLinkController::generateListOfLinks')) }}
                 </div>
                 <div class="modal-footer d-block">
                     <h5 class="modal-title mb-2">{{ "choose_link_widget.or_write_own_url"|trans({},null,admin_locale) }}</h5>

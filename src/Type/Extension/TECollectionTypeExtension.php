@@ -10,9 +10,9 @@ use TwinElements\FormExtensions\Type\TECollectionType;
 
 class TECollectionTypeExtension extends AbstractTypeExtension
 {
-    public function getExtendedTypes() :iterable
+    public static function getExtendedTypes() :iterable
     {
-        return array(TECollectionType::class);
+        return [TECollectionType::class];
     }
 
     public function configureOptions(OptionsResolver $resolver)
