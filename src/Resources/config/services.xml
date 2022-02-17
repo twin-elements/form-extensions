@@ -11,12 +11,6 @@
             <tag name="form.type"/>
         </prototype>
 
-<!--        <service id="TwinElements\FormExtensions\Controller\FileManagerController">-->
-<!--            <argument>%app_locales%</argument>-->
-<!--            <argument>%locale%</argument>-->
-<!--            <tag name="controller.service_arguments"/>-->
-<!--        </service>-->
-
         <service id="TwinElements\FormExtensions\Controller\ChooseLinkController">
             <tag name="controller.service_arguments"/>
         </service>
@@ -24,11 +18,10 @@
         <service id="TwinElements\FormExtensions\Type\Extension\TECollectionTypeExtension">
             <tag name="form.type_extension"  />
         </service>
-<!--        extended_type="TwinElements\FormExtensions\Type\TECollectionType"-->
+
         <service id="TwinElements\FormExtensions\Type\Extension\TEUploadTypeExtension">
             <tag name="form.type_extension"  />
         </service>
-<!--        extended_type="TwinElements\FormExtensions\Type\TEUploadType"-->
 
         <service id="TwinElements\FormExtensions\Component\UrlBuilder\ModuleUrlGeneratorFactory">
             <argument type="tagged" tag="twin_elements.url_builder"/>
@@ -37,16 +30,7 @@
         <service id="TwinElements\FormExtensions\Twig\ModuleUrlGenerator\ModuleUrlGeneratorExtension" />
         <service id="TwinElements\FormExtensions\Twig\ModuleUrlGenerator\ModuleUrlGeneratorRuntime" />
         <service id="TwinElements\FormExtensions\Component\UrlBuilder\ModuleUrlBuilder" />
+        <service id="TwinElements\FormExtensions\Utils\RedirectChecker" />
 
     </services>
 </container>
-
-<!--        collection_type_extension:-->
-<!--        class: TwinElements\FormExtensions\Type\Extension\TECollectionTypeExtension-->
-<!--        tags:-->
-<!--        - { name: form.type_extension, extended_type: App\Bundle\CoreAdminBundle\Form\TECollectionType }-->
-
-<!--        te_upload_type_extension:-->
-<!--        class: TwinElements\FormExtensions\Type\Extension\TEUploadTypeExtension-->
-<!--        tags:-->
-<!--        - { name: form.type_extension, extended_type: App\Bundle\CoreAdminBundle\Form\TEUploadType }-->
