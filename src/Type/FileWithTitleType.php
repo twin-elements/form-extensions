@@ -18,7 +18,8 @@ class FileWithTitleType extends AbstractType
             ->add('file', TEUploadType::class, [
                 'label' => 'Plik',
                 'required' => false,
-                'conf' => $options['conf']
+                'conf' => $options['conf'],
+                'file_type'=> ($options['file_type'] ? $options['file_type'] : null)
             ]);
     }
 

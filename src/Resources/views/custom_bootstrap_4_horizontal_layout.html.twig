@@ -95,7 +95,7 @@
 
 {% block date_picker_widget %}
     <div class="form-group row align-items-center">
-        {#        {{ form_label(form) }}#}
+        {# {{ form_label(form) }} #}
         <div class="input-group date col-sm-5 align-items-center justify-content-center" data-toggle="datetimepicker">
             {{ block('datetime_widget') }}
             <span class="input-group-addon ">
@@ -123,7 +123,7 @@
 {% endblock %}
 
 {% block te_collection_prototype_horizontal %}
-    <div class="form-row collection-child-actions-container">
+    <div class="form-row collection-child-actions-container p-6">
         {% set row_active = collection_children.active is defined ? collection_children.active : false %}
         {% set row_state = row_active ? (row_active.vars.value ? '' : ' disabled') : '' %}
         {% if collection_children | length %}
@@ -165,9 +165,16 @@
     {{ block('accordion_card') }}
 {% endblock %}
 
+{% block core_admin_bundle_tecollection_type_row %}
+    <div class="mt-8 mb-8">
+        <h3 class="h6 mb-6">{{ label }}</h3>
+        {{ block('core_admin_bundle_tecollection_type_widget') }}
+    </div>
+{% endblock %}
+
 {% block core_admin_bundle_tecollection_type_widget %}
-    <div class="te-collection-type-container row">
-        <div class="col-12">
+    <div class="te-collection-type-container">
+        <div class="">
             {% apply spaceless %}
                 {% set accordion_id = id %}
                 {% set accordion_card_active = false %}
@@ -195,6 +202,12 @@
 {% endblock %}
 
 {% block core_admin_bundle_teupload_type_widget %}
+    {% if file_type == 'image' and data is not null %}
+        <div class="mb-6">
+            <img src="{{ asset(data) }}" alt="" style="max-height: 120px;" class="border p-3">
+        </div>
+
+    {% endif %}
     <div class="input-group">
         {% if file_type == 'image' and data is not null %}
             <div class="input-group-prepend">
