@@ -77,3 +77,9 @@ choose_link_widget:
   choose_file: Wybierz plik
   cancel: Anuluj
   choose: Wybierz
+
+crop: Przytnij
+crop_and_replace: Przytnij i podmień
+just_crop: Tylko przytnij
+proportion: Proporcja
+edit_filemanager_image_title: Edycja obrazka

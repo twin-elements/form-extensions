@@ -77,3 +77,9 @@ choose_link_widget:
   choose_file: Выбери файл
   cancel: Отменить
   choose: Выбрать
+
+crop: Обрезать
+crop_and_replace: Обрезать и подменить
+just_crop: Только обрезать
+proportion: Пропорция
+edit_filemanager_image_title: Редактирование изображения

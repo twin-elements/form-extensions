@@ -3,6 +3,7 @@
 namespace TwinElements\FormExtensions\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,8 +20,16 @@ class FileWithTitleType extends AbstractType
                 'label' => 'Plik',
                 'required' => false,
                 'conf' => $options['conf'],
-                'file_type'=> ($options['file_type'] ? $options['file_type'] : null)
+                'file_type' => ($options['file_type'] ? $options['file_type'] : null)
             ]);
+        if ($options['file_type'] === 'image') {
+            $builder->add('mini', TEUploadType::class, [
+                'label' => 'Miniatura',
+                'required' => false,
+                'conf' => $options['conf'],
+                'file_type' => 'image'
+            ]);
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

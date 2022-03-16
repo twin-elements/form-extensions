@@ -77,3 +77,9 @@ choose_link_widget:
   choose_file: Choose file
   cancel: Cancel
   choose: Choose
+
+crop: Crop
+crop_and_replace: Crop and replace
+just_crop: Just crop
+proportion: Proportion
+edit_filemanager_image_title: Image edit

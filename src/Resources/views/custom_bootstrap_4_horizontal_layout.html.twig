@@ -123,7 +123,7 @@
 {% endblock %}
 
 {% block te_collection_prototype_horizontal %}
-    <div class="form-row collection-child-actions-container p-6">
+    <div class="form-row collection-child-actions-container align-items-end p-6">
         {% set row_active = collection_children.active is defined ? collection_children.active : false %}
         {% set row_state = row_active ? (row_active.vars.value ? '' : ' disabled') : '' %}
         {% if collection_children | length %}
@@ -204,9 +204,15 @@
 {% block core_admin_bundle_teupload_type_widget %}
     {% if file_type == 'image' and data is not null %}
         <div class="mb-6">
-            <img src="{{ asset(data) }}" alt="" style="max-height: 120px;" class="border p-3">
+            <img id="crop-{{ id }}" src="{{ asset(data) }}" alt="" style="max-height: 120px;" class="crop-image border p-3">
+            <button
+                    type="button"
+                    class="btn btn-primary btn-sm ml-4 cropper-open-modal"
+                    data-toggle="modal"
+                    data-target="#cropperModal"
+                    data-src="{{ path('edit_filemanager_image', {'image': asset(data), 'form-id': id}) }}"
+            >{{ "crop"|translate_admin }}</button>
         </div>
-
     {% endif %}
     <div class="input-group">
         {% if file_type == 'image' and data is not null %}
