@@ -24,12 +24,14 @@ class TEUploadTypeExtension extends AbstractTypeExtension
             'file_type' => 'file',
             'conf' => null,
             'allow_copy' => true,
+            'extra' => []
         ]);
     }
 
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
+        $view->vars['extra'] = $options['extra'];
         $view->vars['delete_button_text'] = $options['delete_button_text'];
         $view->vars['add_button_text'] = $options['add_button_text'];
         $view->vars['placeholder'] = $options['placeholder'];

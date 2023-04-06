@@ -233,7 +233,7 @@
         <div class="input-group-append col-sm-3 col-xl-5 p-0">
             <div class="btn-group row mx-0 w-100" role="group" id="{{ id }}-btn-group">
                 <button class="btn btn-secondary col-6 open-file-manager-btn"
-                        data-iframe-src="{{ path('file_manager', {'module': 1, 'conf': conf}) }}"
+                        data-iframe-src="{{ path('file_manager', {'module': 1, 'conf': conf, 'extra': extra}) }}"
                         data-modal-title="{{ placeholder }}" data-input-id="{{ id }}" type="button"
                         id="{{ id }}-add-button"><span class="d-none d-xl-inline">{{ add_button_text }}</span> <i
                             class="jcon jcon-add"></i></button>
